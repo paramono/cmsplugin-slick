@@ -1,3 +1,2 @@
 recursive-include cmsplugin_slick/templates *
-recursive-include cmsplugin_slick/static *
 recursive-include cmsplugin_slick/locale *

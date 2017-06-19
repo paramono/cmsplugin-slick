@@ -8,6 +8,7 @@ cmsplugin-slick
 ===============
 
 Slick_ carousel plugin fo Django-CMS
+
 .. _Slick: http://kenwheeler.github.io/slick/
 
 .. image:: https://img.shields.io/badge/Donate-PayPal-blue.svg
