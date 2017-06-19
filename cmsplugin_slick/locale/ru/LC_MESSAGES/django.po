@@ -1,0 +1,128 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Aeternus Atterratio <atterratio@gmail.com>, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-20 00:02+0300\n"
+"PO-Revision-Date: 2017-06-20 00:16+0300\n"
+"Last-Translator: Aeternus Atterratio <atterratio@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
+"=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: apps.py:7
+msgid "Django-CMS plugin Slick carousel"
+msgstr "Django-CMS плагин карусель Slick"
+
+#: cms_plugins.py:29 cms_plugins.py:134 cms_plugins.py:144
+msgid "Slick Carousel"
+msgstr "Карусель Slick"
+
+#: cms_plugins.py:30
+msgid "Carousel Plugin"
+msgstr "Плагин Карусель"
+
+#: cms_plugins.py:135
+msgid "Plugins Wrapper"
+msgstr "Плагин Обёртка"
+
+#: cms_plugins.py:145
+msgid "Image Folder Carousel"
+msgstr "Карусель папки изоображений"
+
+#: models.py:14 models.py:74 models.py:85
+msgid "Title"
+msgstr "Заголовок"
+
+#: models.py:16
+msgid "Use default style"
+msgstr "Использовать стиль  по умолчанию"
+
+#: models.py:18
+msgid "Infinite"
+msgstr "Бесконечная"
+
+#: models.py:20
+msgid "Speed"
+msgstr "Скорость"
+
+#: models.py:22
+msgid "Dots"
+msgstr "Точки"
+
+#: models.py:23
+msgid "Arrows"
+msgstr "Стрелочки"
+
+#: models.py:25 models.py:69
+msgid "Slides to show"
+msgstr "Слайдов для показа"
+
+#: models.py:26 models.py:70
+msgid "Slides to scroll"
+msgstr "Слайдов прокручивается"
+
+#: models.py:28
+msgid "Autoplay"
+msgstr "Автовоспроизведение"
+
+#: models.py:29
+msgid "Autoplay speed"
+msgstr "Скорость автовоспроизведения"
+
+#: models.py:31
+msgid "Pause on hover"
+msgstr "Пауза при наведении"
+
+#: models.py:32
+msgid "Pause on dots hover"
+msgstr "Пауза при наведении на точки"
+
+#: models.py:34
+msgid "Fade animation"
+msgstr "Анимация проявления"
+
+#: models.py:36
+msgid "Center mode"
+msgstr "Режим по центру"
+
+#: models.py:37
+msgid "Center padding"
+msgstr "Поля в режиме по центру"
+
+#: models.py:39
+msgid "Variable Width"
+msgstr "Переменная ширина"
+
+#: models.py:41
+msgid "Vertical"
+msgstr "Вертикальная"
+
+#: models.py:42
+msgid "Right to left"
+msgstr "Справа налево"
+
+#: models.py:44 models.py:75
+msgid "Css classes"
+msgstr "CSS классы"
+
+#: models.py:56 models.py:64
+msgid "Slick carousel"
+msgstr "Карусель Slick"
+
+#: models.py:57
+msgid "Slick carousels"
+msgstr "Карусели Slick"
+
+#: models.py:67
+msgid "Breakpoint resolution"
+msgstr "Разрешение точек разрыва"
