@@ -1,16 +1,16 @@
 {% load thumbnail filer_tags filer_image_tags %}{% spaceless %}
 
 {% comment %}
-	You may change the image size for special cases in your project by overriding
-	this template. There are a few size manipulation filters for this in
-	`filer_image_tags`:
+    You may change the image size for special cases in your project by overriding
+    this template. There are a few size manipulation filters for this in
+    `filer_image_tags`:
 
-	{% if placeholder == 'my_special_sidebar' %}
-		{% thumbnail instance.image opts.size|extra_padding_y:10 crop=opts.crop upscale=opts.upscale as thumbnail %}
-	{% else %}
-		{% thumbnail instance.image opts.size crop=opts.crop upscale=opts.upscale as thumbnail %}
-	{% endif %}
-	{% if link %}<a href="{{ link }}"{% if instance.target_blank %} target="_blank"{% endif %} {{ instance.link_attributes_str }}>{% endif %}<img{% if instance.alignment %} class="{{ instance.alignment }}"{% endif %} alt="{% if instance.alt %}{{ instance.alt }}{% endif %}" src="{{ thumbnail.url }}"{% if instance.caption %} title="{{ instance.caption }}"{% endif %} />{% if link %}</a>{% endif %}
+    {% if placeholder == 'my_special_sidebar' %}
+        {% thumbnail instance.image opts.size|extra_padding_y:10 crop=opts.crop upscale=opts.upscale as thumbnail %}
+    {% else %}
+        {% thumbnail instance.image opts.size crop=opts.crop upscale=opts.upscale as thumbnail %}
+    {% endif %}
+    {% if link %}<a href="{{ link }}"{% if instance.target_blank %} target="_blank"{% endif %} {{ instance.link_attributes_str }}>{% endif %}<img{% if instance.alignment %} class="{{ instance.alignment }}"{% endif %} alt="{% if instance.alt %}{{ instance.alt }}{% endif %}" src="{{ thumbnail.url }}"{% if instance.caption %} title="{{ instance.caption }}"{% endif %} />{% if link %}</a>{% endif %}
 {% endcomment %}
 
 {% for image in folder_images %}
@@ -62,10 +62,10 @@
 
 
 {% if instance.caption or instance.description %}
-	<span class="filer_image_info">
-		{% if instance.caption %}<span class="title">{{ instance.caption }}</span>{% endif %}
-		{% if instance.description %}<span class="desc">{{ instance.description }}</span>{% endif %}
-	</span>
+    <span class="filer_image_info">
+        {% if instance.caption %}<span class="title">{{ instance.caption }}</span>{% endif %}
+        {% if instance.description %}<span class="desc">{{ instance.description }}</span>{% endif %}
+    </span>
 {% endif %}
 {% comment %}
 {% endcomment %}

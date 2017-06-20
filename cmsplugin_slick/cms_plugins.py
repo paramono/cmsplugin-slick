@@ -1,6 +1,8 @@
 import json
+import os
 from django.contrib import admin
 from django.template.loader import select_template
+from django.contrib.staticfiles import finders
 from django.templatetags.static import static
 from django.utils.translation import ugettext_lazy as _
 
@@ -11,16 +13,16 @@ from filer.models.imagemodels import Image
 from cmsplugin_filer_image.conf import settings
 
 from .models import (
-    Carousel, CarouselBreakpoint, CarouselElementWrapper, CaroselImageFolder
+    SlickCarousel, SlickCarouselBreakpoint, SlickCarouselWrappedSlide, SlickCarouselImageFolder
 )
 
 
-class CarouselBreakpointInline(admin.StackedInline):
-    model = CarouselBreakpoint
+class SlickCarouselBreakpointInline(admin.StackedInline):
+    model = SlickCarouselBreakpoint
     extra = 0
 
 
-class CarouselPlugin(CMSPluginBase):
+class SlickCarouselPlugin(CMSPluginBase):
     '''
     Parent slider plugin.
 
@@ -28,13 +30,12 @@ class CarouselPlugin(CMSPluginBase):
     special plugins that generate a list of elements (see
     CarouselImageFolderPlugin below for one such example
     '''
-
-    model = Carousel
+    model = SlickCarousel
     render_template = "cmsplugin_slick/carousel.djhtml"
     module = _('Slick Carousel')
     name = _('Slick Carousel')
     allow_children = True
-    inlines = [CarouselBreakpointInline, ]
+    inlines = [SlickCarouselBreakpointInline,]
 
     fieldsets = (
         (None, {
@@ -43,13 +44,11 @@ class CarouselPlugin(CMSPluginBase):
                 'default_style',
                 'infinite',
                 'speed',
-                'height',
                 ('dots', 'arrows'),
                 ('slides_to_show', 'slides_to_scroll'),
             )
         }),
         (_('Autoplay'), {
-            'classes': ('collapse',),
             'fields': (
                 ('autoplay', 'autoplay_speed'),
                 ('pause_on_hover', 'pause_on_dots_hover'),
@@ -59,18 +58,14 @@ class CarouselPlugin(CMSPluginBase):
             'classes': ('collapse',),
             'fields': (
                 'fade',
+                ('rows', 'slides_per_row'),
                 ('center_mode', 'center_padding'),
-                'variable_width',
+                ('variable_width', 'adaptive_height'),
                 ('vertical', 'rigth_to_left'),
-            )
-        }),
-        (_('Advanced'), {
-            'classes': ('collapse',),
-            'fields': (
                 'classes',
             )
         }),
-        (_('Breakpoint Settings'), {
+        (_('Breakpoints Settings'), {
             'fields': (
                 'auto_breakpoints', 'mobile_first',
             )
@@ -138,7 +133,7 @@ class CarouselPlugin(CMSPluginBase):
         return responsive
 
     def render(self, context, instance, placeholder):
-        context = super(CarouselPlugin, self).render(
+        context = super(SlickCarouselPlugin, self).render(
             context, instance, placeholder)
 
         slick_dict = {
@@ -153,11 +148,15 @@ class CarouselPlugin(CMSPluginBase):
             'pauseOnHover': instance.pause_on_hover,
             'pauseOnDotsHover': instance.pause_on_dots_hover,
             'fade': instance.fade,
+            'rows': instance.rows,
+            'slidesPerRow': instance.slides_per_row,
             'centerMode': instance.center_mode,
             'centerPadding': instance.center_padding,
             'variableWidth': instance.variable_width,
+            'adaptiveHeight': instance.adaptive_height,
             'vertical': instance.vertical,
             'rtl': instance.rigth_to_left,
+            'mobileFirst': instance.mobile_first,
             'slide': ':not(template)',
         }
 
@@ -179,30 +178,65 @@ class CarouselPlugin(CMSPluginBase):
             slick_dict.update({'responsive': responsive})
 
         slick_settings = json.dumps(slick_dict)
-        context.update({'slick_settings': slick_settings})
+
+        try:
+            os.path.isfile(finders.find('cmsplugin_slick/slick/slick.min.js'))
+            
+            slick_js = static('cmsplugin_slick/slick/slick.min.js')
+        except:
+            try:
+                slick_js = '{}/slick.js'.format(settings.SLICK_CDN)
+            except:
+                slick_js = '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js'
+
+        try:
+            os.path.isfile(finders.find('cmsplugin_slick/slick/slick.css'))
+            
+            slick_css = static('cmsplugin_slick/slick/slick.css')
+        except:
+            try:
+                slick_css = '{}/slick.css'.format(settings.SLICK_CDN)
+            except:
+                slick_css = '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css'
+
+        try:
+            os.path.isfile(finders.find('cmsplugin_slick/slick/slick-theme.css'))
+            
+            slick_theme = static('cmsplugin_slick/slick/slick-theme.css')
+        except:
+            try:
+                slick_theme = '{}/slick-theme.css'.format(settings.SLICK_CDN)
+            except:
+                slick_theme = '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css'
+
+        context.update({'slick_settings': slick_settings,
+                        'slick_js': slick_js, 'slick_css': slick_css, 'slick_theme': slick_theme})
+
         return context
 
 
-class CarouselElementWrapperPlugin(CMSPluginBase):
+class SlickCarouselWrappedSlidePlugin(CMSPluginBase):
     '''
-    Include all child plugin as one slide
+    Allow wrapp several Django-CMS plugins like one slide. For example you can add "image" 
+    and "text" plugis, and text will be like caption for image.
     '''
-    model = CarouselElementWrapper
+    model = SlickCarouselWrappedSlide
     render_template = "cmsplugin_slick/element_wrapper.djhtml"
-    module = 'Slick Carousel'
-    name = _('Slide Wrapper')
-    # require_parent = True
-    parent_classes = ['CarouselPlugin']
+    module = _('Slick Carousel')
+    name = _('Wrapped Slide')
+    parent_classes = ['SlickCarouselPlugin', ]
     allow_children = True
 
 
-class CarouselImageFolderPlugin(CMSPluginBase):
-    model = CaroselImageFolder
+class SlickCarouselImageFolderPlugin(CMSPluginBase):
+    '''
+    Returns images from "filer" folder as carousel slides
+    '''
+    model = SlickCarouselImageFolder
     render_template = "cmsplugin_slick/folder_carousel.djhtml"
-    module = 'Slick Carousel'
+    module = _('Slick Carousel')
     name = _('Image Folder Carousel')
-    # require_parent = True
-    parent_classes = ['CarouselPlugin']
+    parent_classes = ['SlickCarouselPlugin', ]
 
     fieldsets = (
         (None, {
@@ -228,7 +262,7 @@ class CarouselImageFolderPlugin(CMSPluginBase):
         """
         Return the size and options of the thumbnail that should be inserted
         """
-        width, height = None, None
+        width, height = 250, 250
         crop, upscale = False, False
         subject_location = False
         placeholder_width = context.get('width', None)
@@ -298,7 +332,7 @@ class CarouselImageFolderPlugin(CMSPluginBase):
             return qs_files.filter(is_public=True)
 
     def render(self, context, instance, placeholder):
-        context = super(CarouselImageFolderPlugin, self).render(context, instance, placeholder)
+        context = super(SlickCarouselImageFolderPlugin, self).render(context, instance, placeholder)
         user = context['request'].user
 
         if instance.folder_id:
@@ -318,6 +352,6 @@ class CarouselImageFolderPlugin(CMSPluginBase):
         return context
 
 
-plugin_pool.register_plugin(CarouselPlugin)
-plugin_pool.register_plugin(CarouselElementWrapperPlugin)
-plugin_pool.register_plugin(CarouselImageFolderPlugin)
+plugin_pool.register_plugin(SlickCarouselPlugin)
+plugin_pool.register_plugin(SlickCarouselWrappedSlidePlugin)
+plugin_pool.register_plugin(SlickCarouselImageFolderPlugin)

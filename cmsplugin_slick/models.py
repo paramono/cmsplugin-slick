@@ -7,29 +7,22 @@ from filer.fields.folder import FilerFolderField
 from cmsplugin_filer_image.conf import settings
 
 
-# Create your models here.
-class Carousel(CMSPlugin):
-    '''
-    Store main settings for carousel
-    '''
-
-    class Meta:
-        verbose_name = _('Carousel')
-        verbose_name_plural = _('Carousels')
-
+# Create your models here.'
+class SlickCarousel(CMSPlugin):
+    '''Store main settings for Slick Carousel'''
     title = models.CharField(verbose_name=_('Title'), max_length=60, blank=True)
+
     default_style = models.BooleanField(verbose_name=_('Use default style'), default=True)
     infinite = models.BooleanField(verbose_name=_('Infinite'), default=True)
     speed = models.IntegerField(verbose_name=_('Speed'), default=300)
-    height = models.PositiveIntegerField(_("height"), null=True, blank=True)
 
     dots = models.BooleanField(verbose_name=_('Dots'), default=True)
     arrows = models.BooleanField(verbose_name=_('Arrows'), default=True)
 
     slides_to_show = models.IntegerField(verbose_name=_('Slides to show'), default=1)
     slides_to_scroll = models.IntegerField(verbose_name=_('Slides to scroll'), default=1)
-
-    # Autoplay
+    
+    #Autoplay
     autoplay = models.BooleanField(verbose_name=_('Autoplay'), default=False)
     autoplay_speed = models.IntegerField(verbose_name=_('Autoplay speed'), null=True, blank=True)
 
@@ -39,17 +32,22 @@ class Carousel(CMSPlugin):
     # Other
     fade = models.BooleanField(verbose_name=_('Fade animation'), default=False)
 
+    rows = models.PositiveIntegerField(verbose_name=_('Rows'), default=1)
+    slides_per_row = models.PositiveIntegerField(verbose_name=_('Slides per row'), default=1)
+
     center_mode = models.BooleanField(verbose_name=_('Center mode'), default=False)
     center_padding = models.CharField(verbose_name=_('Center padding'), max_length=10, blank=True)
 
     variable_width = models.BooleanField(verbose_name=_('Variable Width'), default=False)
+    adaptive_height = models.BooleanField(verbose_name=_('Adaptive Height'), default=False)
 
     vertical = models.BooleanField(verbose_name=_('Vertical'), default=False)
     rigth_to_left = models.BooleanField(verbose_name=_('Right to left'), default=False)
 
-
     # Advanced
-    classes = models.TextField(verbose_name=_('Css classes'), blank=True)
+    classes = models.TextField(verbose_name=_('CSS classes'), blank=True)
+
+    #Breakpoints
     auto_breakpoints = models.BooleanField(verbose_name=_('Auto Breakpoints'), default=True)
     mobile_first = models.BooleanField(
         default=False,
@@ -57,34 +55,50 @@ class Carousel(CMSPlugin):
         help_text=_('Responsive settings use mobile first calculation')
     )
 
-
     def copy_relations(self, oldinstance):
         self.breakpoints = oldinstance.breakpoints.all()
 
+    def __str__(self):
+        if self.title:
+            return self.title
+        else:
+            return str(self.id)
 
-class CarouselBreakpoint(models.Model):
+    class Meta:
+        verbose_name = _("Slick Carousel")
+        verbose_name_plural = _("Slick Carousels")
+
+
+class SlickCarouselBreakpoint(models.Model):
     """
     Carousel breakpoints allow to create responsive carousels
     """
-    carousel = models.ForeignKey('Carousel', related_name='breakpoints', verbose_name=_('Carousel'))
+    carousel = models.ForeignKey('SlickCarousel', related_name='breakpoints', verbose_name=_('Carousel'))
     breakpoint = models.IntegerField(verbose_name=_('Breakpoint resolution'))
     slides_to_show = models.IntegerField(verbose_name=_('Slides to show'), default=1)
     slides_to_scroll = models.IntegerField(verbose_name=_('Slides to scroll'), default=1)
 
     class Meta:
         verbose_name = _('Carousel Breakpoint')
-        verbose_name_plural = _('Carousel Breakpoints')
+        verbose_name_plural = _('Carousels Breakpoints')
 
 
-class CarouselElementWrapper(CMSPlugin):
-    classes = models.TextField(verbose_name=_('Css classes'), blank=True)
+class SlickCarouselWrappedSlide(CMSPlugin):
+    title = models.CharField(_("Title"), max_length=255, null=True, blank=True)
+    classes = models.TextField(verbose_name=_('CSS classes'), blank=True)
+
+    def __str__(self):
+        if self.title:
+            return self.title
+        else:
+            return str(self.id)
 
     class Meta:
-        verbose_name = _('Carousel Slide')
-        verbose_name_plural = _('Carousel Slides')
+        verbose_name = _('Wrapped Slide')
+        verbose_name_plural = _('Wrapped Slides')
 
 
-class CaroselImageFolder(CMSPlugin):
+class SlickCarouselImageFolder(CMSPlugin):
     LEFT = "left"
     RIGHT = "right"
     CENTER = "center"
@@ -149,15 +163,13 @@ class CaroselImageFolder(CMSPlugin):
     # objects = FilerPluginManager(select_related=('image',))
 
     def __str__(self):
-        return self.get_display_name()
-
-    def get_display_name(self):
         if self.title:
             return self.title
         elif self.folder_id and self.folder.name:
             return self.folder.name
-        return _("<empty>")
+        else:
+            return _("<empty>")
 
     class Meta:
         verbose_name = _('Carousel Image Folder')
-        verbose_name_plural = _('Image Folder Carousels')
+        verbose_name_plural = _('Carousels Image Folders')

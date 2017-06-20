@@ -5,32 +5,39 @@
   id="carousel-slick-{{ instance.id }}" 
   class="carousel-slick {{ instance.classes }} slick-outwards"
   >
-	{% for plugin in instance.child_plugin_instances %}
-		{% render_plugin plugin %}
-  {% endfor %}
+    {% for plugin in instance.child_plugin_instances %}
+        {% render_plugin plugin %}
+    {% endfor %}
 </div>
 
-
-{% if instance.height %}
-<style>
-  #carousel-slick-{{ instance.id }} {
-    height: {{ instance.height }}px;
-  }
-  #carousel-slick-{{ instance.id }} .slick-slide {
-    height: {{ instance.height }}px;
-  }
-  #carousel-slick-{{ instance.id }} img {
-    display: block;
-    width: auto;
-    max-height: 100%;
-    margin: 0 auto;
-  }
-</style>
+{% addtoblock 'css' %}<link rel="stylesheet" href='{{ slick_css }}'>{% endaddtoblock %}
+{% if instance.default_style %}
+	{% addtoblock 'css' %}<link rel="stylesheet" href='{{ slick_theme }}'>{% endaddtoblock %}
 {% endif %}
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#carousel-slick-{{ instance.id }}').slick({{ slick_settings|safe }});
-	});
-</script>
+{% if instance.height %}
+    {% addtoblock 'css' %}
+        <style>
+          #carousel-slick-{{ instance.id }} {
+            height: {{ instance.height }}px;
+          }
+          #carousel-slick-{{ instance.id }} .slick-slide {
+            height: {{ instance.height }}px;
+          }
+          #carousel-slick-{{ instance.id }} img {
+            display: block;
+            width: auto;
+            max-height: 100%;
+            margin: 0 auto;
+          }
+        </style>
+    {% endaddtoblock %}
+{% endif %}
+{% addtoblock 'js' %}
+    <script type="text/javascript" src='{{ slick_js }}'></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$('#carousel-slick-{{ instance.id }}').slick({{ slick_settings|safe }});
+    	});
+    </script>
+{% endaddtoblock %}
 {% endspaceless %}
