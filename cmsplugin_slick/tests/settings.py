@@ -158,7 +158,7 @@ INSTALLED_APPS = (
 
 LANGUAGES = (
     ## Customize this
-    ('en', gettext('en')),
+    ('en', 'English'),
 )
 
 CMS_LANGUAGES = {
