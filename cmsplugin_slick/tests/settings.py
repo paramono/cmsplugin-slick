@@ -167,7 +167,7 @@ CMS_LANGUAGES = {
     1: [
         {
             'code': 'en',
-            'name': gettext('en'),
+            'name': 'English',
             'redirect_on_fallback': True,
             'public': True,
             'hide_untranslated': False,
