@@ -1,13 +1,14 @@
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-#
+# cmsplugin_slick Russian translation file
+# Copyright (C) 2017
+# This file is distributed under the same license as the cmsplugin_slick package.
+# Alexander Paramonov <alex@paramono.com>, 2017.
 # Aeternus Atterratio <atterratio@gmail.com>, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-20 00:02+0300\n"
-"PO-Revision-Date: 2017-06-20 00:16+0300\n"
+"POT-Creation-Date: 2017-06-20 04:51+0300\n"
+"PO-Revision-Date: 2017-06-20 04:56+0300\n"
 "Last-Translator: Aeternus Atterratio <atterratio@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru_RU\n"
@@ -19,110 +20,248 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: apps.py:7
-msgid "Django-CMS plugin Slick carousel"
-msgstr "Django-CMS плагин карусель Slick"
+#: cmsplugin_slick/apps.py:7
+msgid "Django-CMS plugin for Slick carousel"
+msgstr "Django-CMS плагин для слайдера Slick"
 
-#: cms_plugins.py:29 cms_plugins.py:134 cms_plugins.py:144
+#: cmsplugin_slick/cms_plugins.py:35 cmsplugin_slick/cms_plugins.py:36
+#: cmsplugin_slick/cms_plugins.py:226 cmsplugin_slick/cms_plugins.py:235
+#: cmsplugin_slick/models.py:63
 msgid "Slick Carousel"
-msgstr "Карусель Slick"
+msgstr "Слайдер Slick"
 
-#: cms_plugins.py:30
-msgid "Carousel Plugin"
-msgstr "Плагин Карусель"
+#: cmsplugin_slick/cms_plugins.py:52 cmsplugin_slick/models.py:27
+msgid "Autoplay"
+msgstr "Автопролистывание"
 
-#: cms_plugins.py:135
-msgid "Plugins Wrapper"
-msgstr "Плагин Обёртка"
+#: cmsplugin_slick/cms_plugins.py:59
+msgid "Others Settings"
+msgstr "Другие настройки"
 
-#: cms_plugins.py:145
+#: cmsplugin_slick/cms_plugins.py:68
+msgid "Advanced"
+msgstr "Продвинутые настройки"
+
+#: cmsplugin_slick/cms_plugins.py:74
+msgid "Breakpoint Settings"
+msgstr "Настройки точек разрыва"
+
+#: cmsplugin_slick/cms_plugins.py:227 cmsplugin_slick/models.py:92
+msgid "Wrapped Slide"
+msgstr "Слайд обёртка"
+
+#: cmsplugin_slick/cms_plugins.py:236
 msgid "Image Folder Carousel"
-msgstr "Карусель папки изоображений"
+msgstr "Слайдер для папки с изображениями"
 
-#: models.py:14 models.py:74 models.py:85
+#: cmsplugin_slick/cms_plugins.py:246
+msgid "Image resizing options"
+msgstr "Опции изменения размеров изображения"
+
+#: cmsplugin_slick/models.py:13 cmsplugin_slick/models.py:82
+#: cmsplugin_slick/models.py:108
 msgid "Title"
 msgstr "Заголовок"
 
-#: models.py:16
+#: cmsplugin_slick/models.py:15
 msgid "Use default style"
-msgstr "Использовать стиль  по умолчанию"
+msgstr "Использовать стиль по умолчанию"
 
-#: models.py:18
+#: cmsplugin_slick/models.py:16
 msgid "Infinite"
-msgstr "Бесконечная"
+msgstr "Зациклить"
 
-#: models.py:20
+#: cmsplugin_slick/models.py:17
 msgid "Speed"
 msgstr "Скорость"
 
-#: models.py:22
+#: cmsplugin_slick/models.py:18 cmsplugin_slick/models.py:124
+msgid "height"
+msgstr "высота"
+
+#: cmsplugin_slick/models.py:20
 msgid "Dots"
 msgstr "Точки"
 
-#: models.py:23
+#: cmsplugin_slick/models.py:21
 msgid "Arrows"
-msgstr "Стрелочки"
+msgstr "Стрелки"
 
-#: models.py:25 models.py:69
+#: cmsplugin_slick/models.py:23 cmsplugin_slick/models.py:73
 msgid "Slides to show"
-msgstr "Слайдов для показа"
+msgstr "Сколько слайдов отобразить"
 
-#: models.py:26 models.py:70
+#: cmsplugin_slick/models.py:24 cmsplugin_slick/models.py:74
 msgid "Slides to scroll"
-msgstr "Слайдов прокручивается"
+msgstr "Сколько слайдов прокручивать"
 
-#: models.py:28
-msgid "Autoplay"
-msgstr "Автовоспроизведение"
-
-#: models.py:29
+#: cmsplugin_slick/models.py:28
 msgid "Autoplay speed"
-msgstr "Скорость автовоспроизведения"
+msgstr "Скорость автопролистывания"
 
-#: models.py:31
+#: cmsplugin_slick/models.py:30
 msgid "Pause on hover"
-msgstr "Пауза при наведении"
+msgstr "Остановить при наведении"
 
-#: models.py:32
+#: cmsplugin_slick/models.py:31
 msgid "Pause on dots hover"
-msgstr "Пауза при наведении на точки"
+msgstr "Остановить при наведении на точки"
 
-#: models.py:34
+#: cmsplugin_slick/models.py:34
 msgid "Fade animation"
-msgstr "Анимация проявления"
+msgstr "Затухающая анимация"
 
-#: models.py:36
+#: cmsplugin_slick/models.py:36
 msgid "Center mode"
-msgstr "Режим по центру"
+msgstr "Режим центрирования"
 
-#: models.py:37
+#: cmsplugin_slick/models.py:37
 msgid "Center padding"
-msgstr "Поля в режиме по центру"
+msgstr "Центрировать внутренние оступы (padding)"
 
-#: models.py:39
+#: cmsplugin_slick/models.py:39
 msgid "Variable Width"
-msgstr "Переменная ширина"
+msgstr "Различающаяся ширина слайдов"
 
-#: models.py:41
+#: cmsplugin_slick/models.py:41
 msgid "Vertical"
-msgstr "Вертикальная"
+msgstr "Вертикальный"
 
-#: models.py:42
+#: cmsplugin_slick/models.py:42
 msgid "Right to left"
-msgstr "Справа налево"
+msgstr "Справа налево (RTL)"
 
-#: models.py:44 models.py:75
-msgid "Css classes"
-msgstr "CSS классы"
+#: cmsplugin_slick/models.py:45 cmsplugin_slick/models.py:83
+msgid "CSS classes"
+msgstr "CSS-классы"
 
-#: models.py:56 models.py:64
-msgid "Slick carousel"
-msgstr "Карусель Slick"
+#: cmsplugin_slick/models.py:46
+msgid "Auto Breakpoints"
+msgstr "Авторасставление точек разрыва"
 
-#: models.py:57
-msgid "Slick carousels"
-msgstr "Карусели Slick"
+#: cmsplugin_slick/models.py:49
+msgid "Mobile First"
+msgstr "Mobile First"
 
-#: models.py:67
+#: cmsplugin_slick/models.py:50
+msgid "Responsive settings use mobile first calculation"
+msgstr "Настройки адаптивности используют отсчёт от Mobile First"
+
+#: cmsplugin_slick/models.py:64
+msgid "Slick Carousels"
+msgstr "Слайдеры Slick"
+
+#: cmsplugin_slick/models.py:71
+msgid "Carousel"
+msgstr "Слайдер"
+
+#: cmsplugin_slick/models.py:72
 msgid "Breakpoint resolution"
 msgstr "Разрешение точек разрыва"
+
+#: cmsplugin_slick/models.py:77
+msgid "Carousel Breakpoint"
+msgstr "Точка разрыва слайдера"
+
+#: cmsplugin_slick/models.py:78
+#| msgid "Carousel Breakpoints"
+msgid "Carousels Breakpoints"
+msgstr "Точки разрывов слайдеров"
+
+#: cmsplugin_slick/models.py:93
+#| msgid "Carousel Slides"
+msgid "Wrapped Slides"
+msgstr "Слайды обёртки"
+
+#: cmsplugin_slick/models.py:100
+msgid "left"
+msgstr "левое"
+
+#: cmsplugin_slick/models.py:101
+msgid "right"
+msgstr "правое"
+
+#: cmsplugin_slick/models.py:102
+msgid "center"
+msgstr "по центру"
+
+#: cmsplugin_slick/models.py:112
+msgid "Style"
+msgstr "Стиль"
+
+#: cmsplugin_slick/models.py:114
+msgid "alt text"
+msgstr "Текст"
+
+#: cmsplugin_slick/models.py:116
+msgid "use the original image"
+msgstr "использовать оригинальное изображение"
+
+#: cmsplugin_slick/models.py:117
+msgid "do not resize the image. use the original image instead."
+msgstr "не менять размер изображения, использовать оригинал"
+
+#: cmsplugin_slick/models.py:119
+msgid "thumbnail option"
+msgstr "опция миниатюры"
+
+#: cmsplugin_slick/models.py:120
+msgid ""
+"overrides width, height, crop and upscale with values from the selected "
+"thumbnail option"
+msgstr ""
+"переопределяет ширину, высоту, кадрирование и масштабирование значениями из "
+"выбранной опции"
+
+#: cmsplugin_slick/models.py:121
+msgid "use automatic scaling"
+msgstr "использовать автоматическое масштабирование"
+
+#: cmsplugin_slick/models.py:122
+msgid "tries to auto scale the image based on the placeholder context"
+msgstr "попытка масштабировать изображение, основываясь на контексте слота"
+
+#: cmsplugin_slick/models.py:123
+msgid "width"
+msgstr "ширина"
+
+#: cmsplugin_slick/models.py:125
+msgid "crop"
+msgstr "обрезать"
+
+#: cmsplugin_slick/models.py:126
+msgid "upscale"
+msgstr "увеличивать"
+
+#: cmsplugin_slick/models.py:166
+msgid "<empty>"
+msgstr "<пустой>"
+
+#: cmsplugin_slick/models.py:169
+msgid "Carousel Image Folder"
+msgstr "Слайдер для папки с изображениями"
+
+#: cmsplugin_slick/models.py:170
+msgid "Carousels Image Folders"
+msgstr "Слайдеры для папок с изображениями"
+
+#~ msgid "Plugins Wrapper"
+#~ msgstr "Обёртка плагинов"
+
+#~ msgid "Carousel Slide"
+#~ msgstr "Слайд"
+
+#~| msgid "Slick Carousel"
+#~ msgid "Slick carousel"
+#~ msgstr "Слайдер Slick"
+
+#, fuzzy
+#~| msgid "Slick Carousel"
+#~ msgid "Slick carousels"
+#~ msgstr "Слайдер Slick"
+
+#~ msgid "Carousels"
+#~ msgstr "Слайдеры"
+
+#~ msgid "Image Folder Carousels"
+#~ msgstr "Слайдеры для папки с изображениями"
