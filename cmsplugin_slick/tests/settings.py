@@ -152,13 +152,14 @@ INSTALLED_APPS = (
     'treebeard',
     'filer',
     'easy_thumbnails',
+    'cmsplugin_filer_image',
 
     'cmsplugin_slick',
 )
 
 LANGUAGES = (
     ## Customize this
-    ('en', gettext('en')),
+    ('en', 'English'),
 )
 
 CMS_LANGUAGES = {

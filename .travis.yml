@@ -18,7 +18,7 @@ matrix:
   - python: "3.3"
     env: "DJANGO_VERSION=1.10.* CMS_VERSION=3.4.*"
 install:
-  - "pip3 install unidecode django==$DJANGO_VERSION django-cms==$CMS_VERSION django-filer"
+  - "pip3 install unidecode django==$DJANGO_VERSION django-cms==$CMS_VERSION django-filer, cmsplugin-filer"
   - "pip3 install coverage"
   - "pip3 install codecov"
   - "pip install django_coverage_plugin"
