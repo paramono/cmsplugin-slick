@@ -15,15 +15,14 @@ class SlickCarousel(CMSPlugin):
     default_style = models.BooleanField(verbose_name=_('Use default style'), default=True)
     infinite = models.BooleanField(verbose_name=_('Infinite'), default=True)
     speed = models.IntegerField(verbose_name=_('Speed'), default=300)
-    height = models.PositiveIntegerField(_("height"), null=True, blank=True)
 
     dots = models.BooleanField(verbose_name=_('Dots'), default=True)
     arrows = models.BooleanField(verbose_name=_('Arrows'), default=True)
 
     slides_to_show = models.IntegerField(verbose_name=_('Slides to show'), default=1)
     slides_to_scroll = models.IntegerField(verbose_name=_('Slides to scroll'), default=1)
+    
     #Autoplay
-
     autoplay = models.BooleanField(verbose_name=_('Autoplay'), default=False)
     autoplay_speed = models.IntegerField(verbose_name=_('Autoplay speed'), null=True, blank=True)
 
@@ -33,16 +32,22 @@ class SlickCarousel(CMSPlugin):
     # Other
     fade = models.BooleanField(verbose_name=_('Fade animation'), default=False)
 
+    rows = models.PositiveIntegerField(verbose_name=_('Rows'), default=1)
+    slides_per_row = models.PositiveIntegerField(verbose_name=_('Slides per row'), default=1)
+
     center_mode = models.BooleanField(verbose_name=_('Center mode'), default=False)
     center_padding = models.CharField(verbose_name=_('Center padding'), max_length=10, blank=True)
 
     variable_width = models.BooleanField(verbose_name=_('Variable Width'), default=False)
+    adaptive_height = models.BooleanField(verbose_name=_('Adaptive Height'), default=False)
 
     vertical = models.BooleanField(verbose_name=_('Vertical'), default=False)
     rigth_to_left = models.BooleanField(verbose_name=_('Right to left'), default=False)
 
     # Advanced
     classes = models.TextField(verbose_name=_('CSS classes'), blank=True)
+
+    #Breakpoints
     auto_breakpoints = models.BooleanField(verbose_name=_('Auto Breakpoints'), default=True)
     mobile_first = models.BooleanField(
         default=False,

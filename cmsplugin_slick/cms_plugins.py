@@ -44,13 +44,11 @@ class SlickCarouselPlugin(CMSPluginBase):
                 'default_style',
                 'infinite',
                 'speed',
-                'height',
                 ('dots', 'arrows'),
                 ('slides_to_show', 'slides_to_scroll'),
             )
         }),
         (_('Autoplay'), {
-            'classes': ('collapse',),
             'fields': (
                 ('autoplay', 'autoplay_speed'),
                 ('pause_on_hover', 'pause_on_dots_hover'),
@@ -60,18 +58,14 @@ class SlickCarouselPlugin(CMSPluginBase):
             'classes': ('collapse',),
             'fields': (
                 'fade',
+                ('rows', 'slides_per_row'),
                 ('center_mode', 'center_padding'),
-                'variable_width',
+                ('variable_width', 'adaptive_height'),
                 ('vertical', 'rigth_to_left'),
-            )
-        }),
-        (_('Advanced'), {
-            'classes': ('collapse',),
-            'fields': (
                 'classes',
             )
         }),
-        (_('Breakpoint Settings'), {
+        (_('Breakpoints Settings'), {
             'fields': (
                 'auto_breakpoints', 'mobile_first',
             )
@@ -154,11 +148,15 @@ class SlickCarouselPlugin(CMSPluginBase):
             'pauseOnHover': instance.pause_on_hover,
             'pauseOnDotsHover': instance.pause_on_dots_hover,
             'fade': instance.fade,
+            'rows': instance.rows,
+            'slidesPerRow': instance.slides_per_row,
             'centerMode': instance.center_mode,
             'centerPadding': instance.center_padding,
             'variableWidth': instance.variable_width,
+            'adaptiveHeight': instance.adaptive_height,
             'vertical': instance.vertical,
             'rtl': instance.rigth_to_left,
+            'mobileFirst': instance.mobile_first,
             'slide': ':not(template)',
         }
 
@@ -219,7 +217,8 @@ class SlickCarouselPlugin(CMSPluginBase):
 
 class SlickCarouselWrappedSlidePlugin(CMSPluginBase):
     '''
-    Include all child plugin as one slide
+    Allow wrapp several Django-CMS plugins like one slide. For example you can add "image" 
+    and "text" plugis, and text will be like caption for image.
     '''
     model = SlickCarouselWrappedSlide
     render_template = "cmsplugin_slick/element_wrapper.djhtml"
@@ -230,6 +229,9 @@ class SlickCarouselWrappedSlidePlugin(CMSPluginBase):
 
 
 class SlickCarouselImageFolderPlugin(CMSPluginBase):
+    '''
+    Returns images from "filer" folder as carousel slides
+    '''
     model = SlickCarouselImageFolder
     render_template = "cmsplugin_slick/folder_carousel.djhtml"
     module = _('Slick Carousel')
